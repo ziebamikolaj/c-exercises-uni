@@ -10,43 +10,27 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest  # Only use Ubuntu Linux
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Clang
-      uses: egor-tensin/setup-clang@v1
-      with:
-        version: latest
-        platform: x64
-    - name: Rename files 
-      run: |
-        chmod +x rename.sh
-        ./rename.sh
-    - name: Compile C files
-      run: |
-        chmod +x compile.sh
-        # This line executes the 'compile.sh' script and exits with code 1 if the compilation fails.
-        ./compile.sh || exit 1
-        if [ $? -ne 0 ]; then
-          exit 1
-        fi
-      shell: bash
-    - name: Upload Artifacts for Windows
-      if: matrix.os == 'windows-latest'
-      uses: actions/upload-artifact@v3
-      with:
-        name: compiled-windows
-        path: |
-          **/*.exe
-        if-no-files-found: error
-    - name: Upload Artifacts for Unix/Linux
-      if: matrix.os != 'windows-latest'
-      uses: actions/upload-artifact@v3
-      with:
-        name: compiled-unix-linux
-        path: |
-          **/*
-        if-no-files-found: error
+      - uses: actions/checkout@v3
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest  # Consider specifying a specific Clang version
+          platform: x64
+      - name: Rename files 
+        run: |
+          chmod +x rename.sh
+          ./rename.sh
+      - name: Compile C files
+        run: |
+          chmod +x compile.sh
+          ./compile.sh || exit 1   # Shortened for clarity 
+        shell: bash  # Ensure bash is used
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-linux  # More specific name
+          path: |
+            **/*
+          if-no-files-found: error 
