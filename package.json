@@ -1,0 +1,11 @@
+{
+  "name": "c-exercises-uni",
+  "version": "1.0.0",
+  "description": "This repository contains exercises in C from my university.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
