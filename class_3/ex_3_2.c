@@ -7,10 +7,10 @@ int main()
     int rows, cols;
 
     printf("Podaj liczbe wierszy: ");
-    scanf_s("%d", &rows);
+    scanf("%d", &rows);
 
     printf("Podaj liczbe kolumn: ");
-    scanf_s("%d", &cols);
+    scanf("%d", &cols);
 
     int **matrix = (int **)malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++)
