@@ -36,7 +36,7 @@ int main()
 
     for (int i = 0; i < MAX_STUDENTS; i++)
     {
-        sprintf_s(students[i].name, sizeof(students[i].name), "Student %d", i + 1);
+        sprintf(students[i].name, "Student %d", i + 1);
         students[i].finalGrade = (float)(rand() % 101) / 10.0;
     }
 
